@@ -1,0 +1,7 @@
+Baseline Classifier,Baseline Mean Top-1,HMM Mean Top-1,Mean Per-Trip Delta,Trips Improved,Trips Tied,Trips Regressed,HMM Win Rate (%)
+Logistic Regression,0.7921,0.9256,0.1335,80,0,0,100.0
+Gaussian Naive Bayes,0.7561,0.9256,0.1695,80,0,0,100.0
+Decision Tree,0.8008,0.9256,0.1248,79,0,1,98.75
+Random Forest,0.818,0.9256,0.1076,78,0,2,97.5
+HistGradientBoosting,0.8156,0.9256,0.11,78,0,2,97.5
+Original HMM (14-feature),0.915,0.9256,0.0106,63,1,16,78.75
