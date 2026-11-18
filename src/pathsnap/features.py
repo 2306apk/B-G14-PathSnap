@@ -21,7 +21,7 @@ from pathsnap.graph import RoadNetwork
 from pathsnap.candidates import CandidateGenerationResult
 
 
-FEATURE_COLUMNS = [
+OBSERVATION_FEATURE_COLUMNS = [
     "dist_to_arc",
     "dist_to_from_node",
     "dist_to_to_node",
@@ -37,6 +37,19 @@ FEATURE_COLUMNS = [
     "candidate_count",
     "dist_to_alternative",
 ]
+
+TRANSITION_FEATURE_COLUMNS = [
+    "gps_displacement_m",
+    "network_transition_distance_m",
+    "transition_distance_residual_m",
+    "turn_angle_change_deg",
+]
+
+# Backward compatibility: FEATURE_COLUMNS refers to the 14 classifier observation features
+FEATURE_COLUMNS = OBSERVATION_FEATURE_COLUMNS
+
+# Complete 18-feature map matching pipeline
+ALL_MAPMATCHING_FEATURES = OBSERVATION_FEATURE_COLUMNS + TRANSITION_FEATURE_COLUMNS
 
 METADATA_COLUMNS = [
     "trip_id",
@@ -119,7 +132,51 @@ FEATURE_SCHEMA: Dict[str, Dict[str, str]] = {
         "description": "Distance margin to the nearest competing candidate arc.",
         "rationale": "Measures confidence: a large margin indicates an unambiguous choice with no close competitors.",
     },
+    # --- Four Transition-Level Features (Completing the 18-Feature System) ---
+    "gps_displacement_m": {
+        "unit": "meters",
+        "category": "transition",
+        "description": "Euclidean/geodesic distance between consecutive GPS observations in metres on projected UTM plane.",
+        "rationale": "Quantifies physical vehicle movement between time steps t-1 and t.",
+    },
+    "network_transition_distance_m": {
+        "unit": "meters",
+        "category": "transition",
+        "description": "Directed road-network distance required to travel between previous and current candidate road arcs.",
+        "rationale": "Measures true topological path feasibility along directed road network edges.",
+    },
+    "transition_distance_residual_m": {
+        "unit": "meters",
+        "category": "transition",
+        "description": "Absolute difference between network transition distance and GPS displacement.",
+        "rationale": "Primary movement plausibility indicator: true path transitions have near-zero residual.",
+    },
+    "turn_angle_change_deg": {
+        "unit": "degrees [0, 180]",
+        "category": "transition",
+        "description": "Circular angular change in heading direction between consecutive candidate road arcs.",
+        "rationale": "Penalizes sharp turns and unphysical U-turns into oncoming traffic.",
+    },
 }
+
+
+@dataclass
+class TransitionFeatures:
+    """Stores the four transition-level features for a candidate arc pair (a_{t-1}, a_t)."""
+
+    gps_displacement_m: float
+    network_transition_distance_m: float
+    transition_distance_residual_m: float
+    turn_angle_change_deg: float
+    is_unreachable: bool
+
+
+def calculate_turn_angle_change(bearing1: float, bearing2: float) -> float:
+    """Calculates circular angular change between two directed arc bearings wrapped to [0, 180]."""
+    diff = abs(bearing1 - bearing2)
+    if diff > 180.0:
+        diff = 360.0 - diff
+    return float(diff)
 
 
 def build_observation_gps_features(
