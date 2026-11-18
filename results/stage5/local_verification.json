@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "health": {
+    "status": "ok",
+    "model_loaded": true,
+    "partition": "student_test",
+    "trip_count": 10
+  },
+  "trip_tested": "00000052",
+  "observations": 262,
+  "inference_seconds": 0.376,
+  "classifier_top1": 0.9198473282442748,
+  "hmm_top1": 0.9732824427480916,
+  "reference_labels_exposed": false,
+  "deployment_scope": "single_laptop_local"
+}
