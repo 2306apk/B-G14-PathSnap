@@ -1,0 +1,118 @@
+Bayesian TPE tuning model: hist_gradient_boosting
+Prepared train trip 1/80: 00000001 -> 110 samples; candidate miss 4.55%; alignment median 4.3m
+Prepared train trip 2/80: 00000002 -> 604 samples; candidate miss 9.11%; alignment median 5.8m
+Prepared train trip 3/80: 00000003 -> 69 samples; candidate miss 5.80%; alignment median 5.7m
+Prepared train trip 4/80: 00000004 -> 89 samples; candidate miss 2.25%; alignment median 8.4m
+Prepared train trip 5/80: 00000005 -> 88 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 6/80: 00000006 -> 121 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 7/80: 00000008 -> 258 samples; candidate miss 2.71%; alignment median 8.0m
+Prepared train trip 8/80: 00000010 -> 226 samples; candidate miss 4.42%; alignment median 7.1m
+Prepared train trip 9/80: 00000011 -> 236 samples; candidate miss 1.69%; alignment median 5.3m
+Prepared train trip 10/80: 00000012 -> 134 samples; candidate miss 2.24%; alignment median 5.5m
+Prepared train trip 11/80: 00000013 -> 215 samples; candidate miss 3.26%; alignment median 4.5m
+Prepared train trip 12/80: 00000014 -> 38 samples; candidate miss 0.00%; alignment median 5.1m
+Prepared train trip 13/80: 00000016 -> 109 samples; candidate miss 15.60%; alignment median 9.2m
+Prepared train trip 14/80: 00000018 -> 32 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared train trip 15/80: 00000019 -> 197 samples; candidate miss 1.52%; alignment median 5.5m
+Prepared train trip 16/80: 00000020 -> 197 samples; candidate miss 0.51%; alignment median 5.4m
+Prepared train trip 17/80: 00000021 -> 1316 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 18/80: 00000022 -> 40 samples; candidate miss 0.00%; alignment median 3.7m
+Prepared train trip 19/80: 00000024 -> 67 samples; candidate miss 0.00%; alignment median 3.0m
+Prepared train trip 20/80: 00000025 -> 99 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 21/80: 00000026 -> 31 samples; candidate miss 0.00%; alignment median 6.5m
+Prepared train trip 22/80: 00000027 -> 58 samples; candidate miss 0.00%; alignment median 3.3m
+Prepared train trip 23/80: 00000028 -> 298 samples; candidate miss 3.02%; alignment median 6.0m
+Prepared train trip 24/80: 00000029 -> 62 samples; candidate miss 0.00%; alignment median 3.7m
+Prepared train trip 25/80: 00000031 -> 354 samples; candidate miss 3.67%; alignment median 4.2m
+Prepared train trip 26/80: 00000032 -> 206 samples; candidate miss 0.49%; alignment median 5.5m
+Prepared train trip 27/80: 00000033 -> 487 samples; candidate miss 68.58%; alignment median 123.7m
+Prepared train trip 28/80: 00000034 -> 302 samples; candidate miss 2.98%; alignment median 6.8m
+Prepared train trip 29/80: 00000035 -> 137 samples; candidate miss 0.73%; alignment median 4.7m
+Prepared train trip 30/80: 00000036 -> 114 samples; candidate miss 1.75%; alignment median 6.0m
+Prepared train trip 31/80: 00000037 -> 57 samples; candidate miss 0.00%; alignment median 2.8m
+Prepared train trip 32/80: 00000038 -> 108 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 33/80: 00000039 -> 31 samples; candidate miss 0.00%; alignment median 3.0m
+Prepared train trip 34/80: 00000041 -> 85 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 35/80: 00000042 -> 645 samples; candidate miss 0.16%; alignment median 3.8m
+Prepared train trip 36/80: 00000043 -> 194 samples; candidate miss 6.19%; alignment median 11.9m
+Prepared train trip 37/80: 00000044 -> 46 samples; candidate miss 0.00%; alignment median 3.6m
+Prepared train trip 38/80: 00000045 -> 54 samples; candidate miss 0.00%; alignment median 3.8m
+Prepared train trip 39/80: 00000046 -> 117 samples; candidate miss 0.00%; alignment median 6.2m
+Prepared train trip 40/80: 00000047 -> 106 samples; candidate miss 2.83%; alignment median 4.6m
+Prepared train trip 41/80: 00000048 -> 104 samples; candidate miss 0.00%; alignment median 7.1m
+Prepared train trip 42/80: 00000050 -> 44 samples; candidate miss 0.00%; alignment median 6.0m
+Prepared train trip 43/80: 00000051 -> 82 samples; candidate miss 0.00%; alignment median 5.9m
+Prepared train trip 44/80: 00000053 -> 109 samples; candidate miss 3.67%; alignment median 4.1m
+Prepared train trip 45/80: 00000054 -> 1610 samples; candidate miss 66.02%; alignment median 137.9m
+Prepared train trip 46/80: 00000055 -> 206 samples; candidate miss 3.40%; alignment median 4.4m
+Prepared train trip 47/80: 00000057 -> 138 samples; candidate miss 0.00%; alignment median 6.7m
+Prepared train trip 48/80: 00000058 -> 50 samples; candidate miss 4.00%; alignment median 5.2m
+Prepared train trip 49/80: 00000060 -> 72 samples; candidate miss 2.78%; alignment median 6.2m
+Prepared train trip 50/80: 00000061 -> 120 samples; candidate miss 8.33%; alignment median 6.4m
+Prepared train trip 51/80: 00000062 -> 282 samples; candidate miss 0.00%; alignment median 5.1m
+Prepared train trip 52/80: 00000063 -> 232 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 53/80: 00000064 -> 175 samples; candidate miss 0.00%; alignment median 4.6m
+Prepared train trip 54/80: 00000066 -> 361 samples; candidate miss 0.00%; alignment median 6.9m
+Prepared train trip 55/80: 00000068 -> 63 samples; candidate miss 0.00%; alignment median 3.9m
+Prepared train trip 56/80: 00000069 -> 173 samples; candidate miss 0.00%; alignment median 4.8m
+Prepared train trip 57/80: 00000070 -> 173 samples; candidate miss 1.16%; alignment median 4.2m
+Prepared train trip 58/80: 00000071 -> 71 samples; candidate miss 0.00%; alignment median 4.0m
+Prepared train trip 59/80: 00000072 -> 81 samples; candidate miss 16.05%; alignment median 5.4m
+Prepared train trip 60/80: 00000074 -> 161 samples; candidate miss 0.62%; alignment median 5.1m
+Prepared train trip 61/80: 00000075 -> 136 samples; candidate miss 0.00%; alignment median 4.1m
+Prepared train trip 62/80: 00000078 -> 243 samples; candidate miss 0.00%; alignment median 4.4m
+Prepared train trip 63/80: 00000079 -> 58 samples; candidate miss 3.45%; alignment median 3.5m
+Prepared train trip 64/80: 00000080 -> 210 samples; candidate miss 0.00%; alignment median 6.7m
+Prepared train trip 65/80: 00000081 -> 269 samples; candidate miss 1.12%; alignment median 4.9m
+Prepared train trip 66/80: 00000082 -> 356 samples; candidate miss 3.09%; alignment median 4.7m
+Prepared train trip 67/80: 00000083 -> 126 samples; candidate miss 4.76%; alignment median 6.0m
+Prepared train trip 68/80: 00000084 -> 1336 samples; candidate miss 1.20%; alignment median 7.2m
+Prepared train trip 69/80: 00000085 -> 91 samples; candidate miss 0.00%; alignment median 3.3m
+Prepared train trip 70/80: 00000086 -> 346 samples; candidate miss 0.87%; alignment median 4.2m
+Prepared train trip 71/80: 00000088 -> 73 samples; candidate miss 1.37%; alignment median 3.8m
+Prepared train trip 72/80: 00000089 -> 103 samples; candidate miss 3.88%; alignment median 5.0m
+Prepared train trip 73/80: 00000090 -> 45 samples; candidate miss 2.22%; alignment median 4.1m
+Prepared train trip 74/80: 00000092 -> 658 samples; candidate miss 0.00%; alignment median 4.3m
+Prepared train trip 75/80: 00000093 -> 101 samples; candidate miss 7.92%; alignment median 6.0m
+Prepared train trip 76/80: 00000095 -> 130 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared train trip 77/80: 00000096 -> 273 samples; candidate miss 1.47%; alignment median 5.5m
+Prepared train trip 78/80: 00000097 -> 145 samples; candidate miss 1.38%; alignment median 3.7m
+Prepared train trip 79/80: 00000098 -> 466 samples; candidate miss 0.21%; alignment median 5.3m
+Prepared train trip 80/80: 00000099 -> 194 samples; candidate miss 0.52%; alignment median 5.5m
+[I 2026-11-18 11:14:18,984] A new study created in RDB with name: pathsnap_hist_gradient_boosting_k8_stride12
+[I 2026-11-18 11:14:22,104] Trial 0 finished with value: 0.6713592351329347 and parameters: {'max_iter': 92, 'max_leaf_nodes': 44, 'learning_rate': 0.12282749728901726, 'l2_regularization': 0.09846738873614563}. Best is trial 0 with value: 0.6713592351329347.
+[I 2026-11-18 11:14:23,973] Trial 1 finished with value: 0.6776009852708093 and parameters: {'max_iter': 64, 'max_leaf_nodes': 13, 'learning_rate': 0.028366057173109065, 'l2_regularization': 2.1423021757741068}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:27,989] Trial 2 finished with value: 0.6752622886987266 and parameters: {'max_iter': 120, 'max_leaf_nodes': 34, 'learning_rate': 0.02614458224895278, 'l2_regularization': 7.072114131472227}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:31,857] Trial 3 finished with value: 0.6746273008726217 and parameters: {'max_iter': 149, 'max_leaf_nodes': 16, 'learning_rate': 0.03712534853810741, 'l2_regularization': 0.0008260808399079611}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:34,564] Trial 4 finished with value: 0.6723934916323162 and parameters: {'max_iter': 83, 'max_leaf_nodes': 27, 'learning_rate': 0.0639594313841137, 'l2_regularization': 0.0028585493941961923}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:37,616] Trial 5 finished with value: 0.6753722837015759 and parameters: {'max_iter': 122, 'max_leaf_nodes': 13, 'learning_rate': 0.04719169398408015, 'l2_regularization': 0.0067890532716984855}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:41,179] Trial 6 finished with value: 0.6741709930812506 and parameters: {'max_iter': 102, 'max_leaf_nodes': 37, 'learning_rate': 0.03859476812002728, 'l2_regularization': 0.03725393839578886}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:43,773] Trial 7 finished with value: 0.6734816360108482 and parameters: {'max_iter': 119, 'max_leaf_nodes': 9, 'learning_rate': 0.09370345273764036, 'l2_regularization': 0.0007122305833333872}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:45,879] Trial 8 finished with value: 0.671646896797709 and parameters: {'max_iter': 53, 'max_leaf_nodes': 44, 'learning_rate': 0.20415627431017744, 'l2_regularization': 1.1015056790269626}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:47,952] Trial 9 finished with value: 0.6745709085710141 and parameters: {'max_iter': 83, 'max_leaf_nodes': 11, 'learning_rate': 0.11070984581434086, 'l2_regularization': 0.015876781526923997}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:50,194] Trial 10 finished with value: 0.6699830180379713 and parameters: {'max_iter': 164, 'max_leaf_nodes': 21, 'learning_rate': 0.20589746982639812, 'l2_regularization': 0.00012297288957910168}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:51,805] Trial 11 finished with value: 0.6765150911083656 and parameters: {'max_iter': 47, 'max_leaf_nodes': 18, 'learning_rate': 0.04775866866321979, 'l2_regularization': 0.7663577452200265}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:53,436] Trial 12 finished with value: 0.6739320646703475 and parameters: {'max_iter': 48, 'max_leaf_nodes': 20, 'learning_rate': 0.02655276015317002, 'l2_regularization': 0.545721339584977}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:55,677] Trial 13 finished with value: 0.6758352433150541 and parameters: {'max_iter': 67, 'max_leaf_nodes': 24, 'learning_rate': 0.05709947770884634, 'l2_regularization': 5.702473805612825}. Best is trial 1 with value: 0.6776009852708093.
+[I 2026-11-18 11:14:57,637] Trial 14 finished with value: 0.6765715500351552 and parameters: {'max_iter': 65, 'max_leaf_nodes': 16, 'learning_rate': 0.0353671415331527, 'l2_regularization': 0.4538206804429443}. Best is trial 1 with value: 0.6776009852708093.
+Prepared student_test trip 1/10: 00000000 -> 2503 samples; candidate miss 2.08%; alignment median 6.2m
+Prepared student_test trip 2/10: 00000007 -> 1354 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared student_test trip 3/10: 00000009 -> 1049 samples; candidate miss 3.81%; alignment median 4.8m
+Prepared student_test trip 4/10: 00000040 -> 2995 samples; candidate miss 0.60%; alignment median 5.2m
+Prepared student_test trip 5/10: 00000052 -> 262 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared student_test trip 6/10: 00000056 -> 3958 samples; candidate miss 1.31%; alignment median 5.0m
+Prepared student_test trip 7/10: 00000065 -> 768 samples; candidate miss 2.60%; alignment median 4.7m
+Prepared student_test trip 8/10: 00000076 -> 1486 samples; candidate miss 1.28%; alignment median 7.1m
+Prepared student_test trip 9/10: 00000077 -> 3911 samples; candidate miss 2.86%; alignment median 7.9m
+Prepared student_test trip 10/10: 00000091 -> 874 samples; candidate miss 3.55%; alignment median 5.0m
+Tuning complete: {
+  "best_params": {
+    "max_iter": 64,
+    "max_leaf_nodes": 13,
+    "learning_rate": 0.028366057173109065,
+    "l2_regularization": 2.1423021757741068
+  },
+  "best_cv_accuracy": 0.6776009852708093,
+  "baseline_cv_accuracy": 0.6745728057545758,
+  "limited_smoke_test": false
+}
