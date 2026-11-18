@@ -1,0 +1,13 @@
+{
+  "verified_at_utc": "2026-11-18T09:31:36.010511+00:00",
+  "backend": "Laptop 1 FastAPI",
+  "frontend": "Laptop 2 browser UI",
+  "client_ip": "10.0.8.220",
+  "port": 8000,
+  "checks": {
+    "health": true,
+    "trips": true,
+    "prediction": true
+  },
+  "deployment_status": "PASS"
+}

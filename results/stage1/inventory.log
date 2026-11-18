@@ -1,0 +1,3 @@
+train trips= 80 GPS= 208417 arcs= 3876904
+student_test trips= 10 GPS= 19160 arcs= 185041
+Saved results/stage1/inventory.csv
