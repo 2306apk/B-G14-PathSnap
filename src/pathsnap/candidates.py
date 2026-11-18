@@ -40,15 +40,16 @@ def generate_candidates_for_trip(
 
     For each candidate, computes:
     - candidate_arc_id: trip-local arc ID
-    - candidate_rank: 1-based rank by perpendicular distance
+    - candidate_rank: 1-based rank by perpendicular distance (1 = closest)
     - dist_to_arc: perpendicular distance in meters
     - dist_to_from_node: distance to from-node
     - dist_to_to_node: distance to to-node
-    - proj_ratio: projection parameter t in [0, 1]
-    - proj_x, proj_y: metric coordinates of projection point
+    - proj_ratio: projection parameter t in [0.0, 1.0] (progress along segment)
+    - proj_x, proj_y: metric coordinates of projection point on the segment
     - total_candidates: count of candidates found for this GPS observation
     - dist_to_alternative: distance difference to nearest alternative candidate
     """
+    # Project spherical GPS coordinates (lon, lat) to planar metric coordinates (tx, ty)
     tx, ty = network.projector.forward(track_df["longitude"].values, track_df["latitude"].values)
     num_points = len(tx)
 
@@ -56,53 +57,58 @@ def generate_candidates_for_trip(
     zero_cand_count = 0
     cand_counts: List[int] = []
 
-    # Pre-extract endpoint coordinates for fast lookups
+    # Pre-extract endpoint coordinates into flat numpy arrays for fast vectorized lookups
     arc_x1 = network.arc_table["x1"].values
     arc_y1 = network.arc_table["y1"].values
     arc_x2 = network.arc_table["x2"].values
     arc_y2 = network.arc_table["y2"].values
 
+    # Iterate through each GPS point in the trajectory
     for obs_idx in range(num_points):
         px, py = float(tx[obs_idx]), float(ty[obs_idx])
-        # 1. Query spatial index
+        
+        # Step 1: Query spatial R-tree (STRtree) index for road segments within the search radius (e.g. 50m)
         cand_arc_ids = network.query_candidate_arcs(px, py, radius)
         count = len(cand_arc_ids)
         cand_counts.append(count)
 
+        # Track observations where GPS drift exceeded the search radius (zero candidates found)
         if count == 0:
             zero_cand_count += 1
             continue
 
-        # 2. Compute exact distances and projection geometry
+        # Step 2: Compute exact perpendicular distances, node distances, and projection ratio [0, 1]
         cand_details: List[Tuple[int, float, float, float, float, float, float]] = []
         for arc_id in cand_arc_ids:
             x1 = arc_x1[arc_id]
             y1 = arc_y1[arc_id]
             x2 = arc_x2[arc_id]
             y2 = arc_y2[arc_id]
+            # Projects point (px, py) orthogonally onto directed segment (x1, y1) -> (x2, y2)
             d_seg, d_from, d_to, t_clamped, qx, qy = point_to_segment_projection(
                 px, py, x1, y1, x2, y2
             )
             cand_details.append((arc_id, d_seg, d_from, d_to, t_clamped, qx, qy))
 
-        # 3. Sort by perpendicular distance ascending
+        # Step 3: Sort candidate arcs by perpendicular distance ascending (closest road first)
         cand_details.sort(key=lambda item: item[1])
 
+        # Optional cap on max candidates per observation
         if max_candidates_per_point is not None:
             cand_details = cand_details[:max_candidates_per_point]
 
         actual_k = len(cand_details)
         dists = [item[1] for item in cand_details]
 
-        # 4. Build records
+        # Step 4: Build feature records with proximity rank and alternative margin
         for rank_idx, (arc_id, d_seg, d_from, d_to, t_clamped, qx, qy) in enumerate(cand_details):
-            # Calculate distance to nearest alternative candidate
+            # Calculate distance margin to nearest competitor (measures choice ambiguity)
             if actual_k == 1:
-                dist_alt = radius - d_seg  # Margin to boundary
+                dist_alt = radius - d_seg  # Only one road nearby; margin is distance to search perimeter
             elif rank_idx == 0:
-                dist_alt = dists[1] - d_seg  # Difference to 2nd closest
+                dist_alt = dists[1] - d_seg  # Difference between 1st and 2nd closest candidate
             else:
-                dist_alt = d_seg - dists[0]  # Difference from closest
+                dist_alt = d_seg - dists[0]  # Difference between this candidate and the best candidate
 
             records.append(
                 {
@@ -121,6 +127,7 @@ def generate_candidates_for_trip(
             )
 
     candidates_df = pd.DataFrame(records)
+    # Ensure standard schema even if no candidates were found
     if candidates_df.empty:
         candidates_df = pd.DataFrame(
             columns=[

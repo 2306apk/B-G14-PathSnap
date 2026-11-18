@@ -79,10 +79,15 @@ DATA_CACHE: Dict[str, pd.DataFrame] = {}
 
 
 def get_local_ip_addresses() -> Dict[str, str]:
-    """Detects available local IP addresses (LAN and ZeroTier if available)."""
+    """Detects available local IP addresses (LAN and ZeroTier if available).
+    
+    Used to automatically broadcast connection URLs so a second machine (e.g. Windows laptop)
+    can easily connect to this backend server across the local network.
+    """
     ips = {"lan": "127.0.0.1", "hostname": socket.gethostname()}
     try:
-        # Standard UDP socket trick to discover primary outbound LAN interface
+        # Standard UDP socket trick: connects to a public IP (without sending packets)
+        # to determine the operating system's chosen outbound network interface.
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.settimeout(0.5)
         s.connect(("8.8.8.8", 80))
@@ -91,7 +96,7 @@ def get_local_ip_addresses() -> Dict[str, str]:
     except Exception:
         pass
 
-    # Look for ZeroTier IP (typically 10.x.x.x, 172.x.x.x, or 192.168.19x.x on zt interface)
+    # Look for ZeroTier virtual IP if running over a private ZeroTier mesh network
     try:
         import subprocess
         if platform.system() == "Darwin":
@@ -111,13 +116,17 @@ def get_local_ip_addresses() -> Dict[str, str]:
 
 
 def load_assets():
-    """Loads trained models, calibrator, and processed parquet matrices into memory."""
+    """Loads trained models, calibrator, and processed parquet matrices into memory.
+    
+    Pre-warming models at startup ensures subsequent HTTP requests for map matching
+    have sub-second response times.
+    """
     global MODELS, CALIBRATOR, DATA_CACHE
 
     models_dir = repo_root / "outputs" / "models" / "phase2"
     data_dir = repo_root / "data" / "processed"
 
-    # Load Models
+    # Load All Trained Classifiers (Phase 2 & Stage 3 Tuned Model)
     model_files = {
         "tuned_best_model": models_dir / "tuned_best_model.joblib",
         "random_forest": models_dir / "random_forest.joblib",
@@ -134,6 +143,7 @@ def load_assets():
             except Exception as e:
                 print(f"[Warning] Failed to load model {name}: {e}")
 
+    # Load Platt Sigmoid Calibrator (maps raw tree scores to empirical true probabilities)
     cal_path = models_dir / "production_calibrator.joblib"
     if cal_path.exists():
         try:
@@ -141,7 +151,7 @@ def load_assets():
         except Exception as e:
             print(f"[Warning] Failed to load production calibrator: {e}")
 
-    # Load Parquet Data
+    # Pre-cache Parquet Feature Matrices for instant demonstration queries
     parquet_files = {
         "train_features": data_dir / "train_features.parquet",
         "student_test_features": data_dir / "student_test_features.parquet",

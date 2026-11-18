@@ -184,38 +184,42 @@ def build_observation_gps_features(
 ) -> pd.DataFrame:
     """Computes point-level kinematic features (heading, speed, time gap) using past observations only.
 
-    Prevents future leakage by using exclusively t and t-1.
+    Important Leakage Prevention Rule:
+    Strictly uses information from timestamps t and t-1. No future observations (t+1, t+2, etc.)
+    are accessed, ensuring the machine learning classifier cannot cheat via temporal lookahead.
     """
+    # Project GPS coordinates to local metric UTM
     tx, ty = network.projector.forward(track_df["longitude"].values, track_df["latitude"].values)
     timestamps = track_df["timestamp"].values
     num_pts = len(tx)
 
     speeds = np.zeros(num_pts, dtype=np.float64)
     headings = np.zeros(num_pts, dtype=np.float64)
-    time_gaps = np.ones(num_pts, dtype=np.float64)  # Default 1.0s
+    time_gaps = np.ones(num_pts, dtype=np.float64)  # Default 1.0s fallback
 
     last_valid_heading = 0.0
 
+    # Sequential pass from t=1 to end
     for i in range(1, num_pts):
         dt = float(timestamps[i] - timestamps[i - 1])
         if dt <= 0.0:
-            dt = 1e-3  # Avoid divide by zero for duplicate timestamps
+            dt = 1e-3  # Guard against division by zero in duplicate timestamps
         time_gaps[i] = dt
 
+        # Euclidean displacement between consecutive GPS observations
         dx = tx[i] - tx[i - 1]
         dy = ty[i] - ty[i - 1]
         dist_step = math.hypot(dx, dy)
         speeds[i] = dist_step / dt
 
-        # Only update heading if vehicle has moved at least 0.5 meters
-        # to avoid noise from stationary GPS jitter
+        # Only update heading if vehicle has moved at least 0.5 meters;
+        # stationary vehicles suffer from random GPS noise that rotates the bearing erratically.
         if dist_step >= 0.5:
             last_valid_heading = (math.degrees(math.atan2(dx, dy)) + 360.0) % 360.0
 
         headings[i] = last_valid_heading
 
-    # For the first observation (i=0), speed is 0.0, heading inherits from i=1 if available or 0.0
-    # Strictly avoid future leakage in features: speed[0] = 0.0, heading[0] = headings[1] as orientation anchor
+    # Anchor the initial point (i=0): initial speed is 0, heading inherits from i=1
     if num_pts > 1:
         headings[0] = headings[1]
     speeds[0] = 0.0
@@ -251,32 +255,34 @@ def build_candidate_features_dataset(
     if cand_df.empty:
         return pd.DataFrame(columns=METADATA_COLUMNS + FEATURE_COLUMNS + [TARGET_COLUMN])
 
-    # 1. Compute observation-level kinematics
+    # 1. Compute observation-level kinematics (speed, heading, delta t)
     obs_kinematics = build_observation_gps_features(network, track_df).set_index("observation_id")
 
-    # 2. Extract arc attributes from network.arc_table
+    # 2. Extract road segment attributes (bearings, lengths) from network table
     arc_table = network.arc_table.set_index("arc_id")
 
-    # 3. Vectorized feature computation
+    # 3. Vectorized feature assembly
     obs_ids = cand_df["observation_id"].values
     cand_arc_ids = cand_df["candidate_arc_id"].values
 
-    # Merge kinematics
+    # Merge kinematic features for each candidate's corresponding observation
     cand_headings = obs_kinematics.loc[obs_ids, "gps_heading"].values
     cand_speeds = obs_kinematics.loc[obs_ids, "speed_est"].values
     cand_time_gaps = obs_kinematics.loc[obs_ids, "time_gap"].values
     cand_timestamps = obs_kinematics.loc[obs_ids, "timestamp"].values
 
-    # Merge arc attributes
+    # Merge road attributes for each candidate arc
     cand_arc_bearings = arc_table.loc[cand_arc_ids, "bearing"].values
     cand_arc_lengths = arc_table.loc[cand_arc_ids, "length"].values
 
-    # Heading difference and reverse direction
+    # Angular difference between travel direction and permissible road bearing (wrapped to [0, 180])
     diff_raw = np.abs(cand_headings - cand_arc_bearings) % 360.0
     heading_diffs = np.minimum(diff_raw, 360.0 - diff_raw)
+    
+    # Reverse direction flag: 1 if vehicle appears to be moving counter to one-way traffic (>90 deg)
     is_reverse = (heading_diffs > 90.0).astype(np.int8)
 
-    # 4. Target label generation
+    # 4. Target label generation (binary ground-truth matching)
     assigned_arc_ids: Optional[np.ndarray] = None
     labels: np.ndarray
 
@@ -284,11 +290,14 @@ def build_candidate_features_dataset(
         labels_map = labels_df.set_index("observation_id")["assigned_arc_id"].to_dict()
         true_assigned = np.array([labels_map.get(oid, -1) for oid in obs_ids], dtype=np.int64)
         assigned_arc_ids = true_assigned
+        # Binary classification target: 1 = matches ground truth, 0 = incorrect candidate
         labels = (cand_arc_ids == true_assigned).astype(np.int8)
     else:
+        # Unlabelled evaluation split
         assigned_arc_ids = np.full(len(cand_df), -1, dtype=np.int64)
         labels = np.full(len(cand_df), np.nan, dtype=np.float32)
 
+    # Compile the final structured dataset
     features_df = pd.DataFrame(
         {
             "trip_id": network.trip_id,

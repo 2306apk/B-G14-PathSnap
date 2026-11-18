@@ -38,7 +38,14 @@ class NetworkQualityReport:
 
 
 class RoadNetwork:
-    """Independent directed road-network graph and spatial query structure for a trip."""
+    """Independent directed road-network graph and spatial query structure for a trip.
+    
+    Encapsulates:
+    - Node coordinates projected to the trip's local UTM metric plane.
+    - Directed road segments (arcs) with lengths and compass bearings.
+    - Spatial STRtree index for high-speed radius candidate queries.
+    - NetworkX DiGraph for shortest path traversal and connectivity checks.
+    """
 
     def __init__(
         self,
@@ -52,7 +59,9 @@ class RoadNetwork:
         self.crs_info = crs_info
         self.projector = projector or Projector(crs_info)
 
-        # 1. Project node coordinates
+        # -------------------------------------------------------------
+        # 1. Project node coordinates from WGS84 (lon, lat) to metric UTM (x, y)
+        # -------------------------------------------------------------
         lons = nodes_df["longitude"].values
         lats = nodes_df["latitude"].values
         nx_coords, ny_coords = self.projector.forward(lons, lats)
@@ -63,7 +72,9 @@ class RoadNetwork:
         self.node_lat = lats
         self.num_nodes = len(nodes_df)
 
-        # 2. Build arc geometries, lengths, and bearings
+        # -------------------------------------------------------------
+        # 2. Build arc geometries, metric lengths, and compass bearings
+        # -------------------------------------------------------------
         from_nodes = arcs_df["from_node_id"].values
         to_nodes = arcs_df["to_node_id"].values
         self.num_arcs = len(arcs_df)
@@ -77,9 +88,10 @@ class RoadNetwork:
         dy = y2 - y1
         lengths = np.hypot(dx, dy)
 
-        # Vectorized bearing calculation
+        # Vectorized compass bearing calculation clockwise from True North [0, 360)
         bearings = (np.degrees(np.arctan2(dx, dy)) + 360.0) % 360.0
 
+        # Tabular representation of all directed road segments
         self.arc_table = pd.DataFrame(
             {
                 "arc_id": np.arange(self.num_arcs, dtype=np.int64),
@@ -94,19 +106,21 @@ class RoadNetwork:
             }
         )
 
-        # Preconstruct LineString geometries for spatial index
-        # Endpoint approximation is documented: intermediate curves are straight-line segments
+        # Preconstruct Shapely LineString geometries for 2D spatial indexing (STRtree)
         self.arc_geometries = [
             LineString([(x1[i], y1[i]), (x2[i], y2[i])]) for i in range(self.num_arcs)
         ]
         self.spatial_index = SpatialRoadIndex(self.arc_geometries, self.arc_table["arc_id"].values)
 
-        # 3. Build NetworkX DiGraph
+        # -------------------------------------------------------------
+        # 3. Construct directed graph (NetworkX DiGraph)
+        # -------------------------------------------------------------
         self.graph = nx.DiGraph()
         self.graph.add_nodes_from(range(self.num_nodes))
         for arc_id in range(self.num_arcs):
             u = int(from_nodes[arc_id])
             v = int(to_nodes[arc_id])
+            # Directed edge from u to v weighted by road length in meters
             self.graph.add_edge(u, v, arc_id=arc_id, weight=float(lengths[arc_id]))
 
     def query_candidate_arcs(self, px: float, py: float, radius: float) -> List[int]:
@@ -114,7 +128,7 @@ class RoadNetwork:
         return self.spatial_index.query_radius(px, py, radius)
 
     def get_arc_endpoints(self, arc_id: int) -> Tuple[float, float, float, float]:
-        """Returns (x1, y1, x2, y2) for a given arc ID."""
+        """Returns (x1, y1, x2, y2) for a given arc ID in metric coordinates."""
         row = self.arc_table.iloc[arc_id]
         return float(row["x1"]), float(row["y1"]), float(row["x2"]), float(row["y2"])
 

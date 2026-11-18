@@ -64,19 +64,21 @@ backendUrlInput.value = apiBaseUrl;
 
 // 1. Initialize Map
 function initMap() {
+  // Initialize the Leaflet interactive map container centered over the study area
   map = L.map('map', {
     center: [30.2741, 120.1551],
     zoom: 13,
     zoomControl: true,
   });
 
-  // Base tile layer: CartoDB Dark Matter / Positron
+  // Base tile layer: CARTO Voyager map tiles for clear road contrast
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
   }).addTo(map);
 
+  // Separate LayerGroups allowing independent toggles for GPS points, predicted route, and ground truth
   layers.gps = L.layerGroup().addTo(map);
   layers.predictedRoute = L.layerGroup().addTo(map);
   layers.referenceRoute = L.layerGroup().addTo(map);
@@ -84,6 +86,7 @@ function initMap() {
 
 // 2. Health & Connectivity Monitoring
 async function checkBackendHealth() {
+  // Pings backend /health endpoint to verify connectivity and compute network round-trip latency
   const t0 = performance.now();
   try {
     const controller = new AbortController();
@@ -115,6 +118,7 @@ async function checkBackendHealth() {
 
 // 3. Load Trips Catalog
 async function loadTrips() {
+  // Fetches list of all trips available on the backend server and populates the trip dropdown
   try {
     const res = await fetch(`${apiBaseUrl}/api/trips`);
     if (!res.ok) throw new Error('Failed to fetch trips');
@@ -250,6 +254,7 @@ async function runHMMMapMatching() {
   const tripMeta = tripsCatalog.find((t) => t.trip_id === tid);
   const partition = tripMeta ? tripMeta.partition : 'student_test';
 
+  // Construct request payload with user-chosen hyperparameters and classifier
   const payload = {
     trip_id: tid,
     partition: partition,
@@ -266,6 +271,7 @@ async function runHMMMapMatching() {
   showLoading(`Running HMM Viterbi decoding for trip ${tid}...`);
 
   try {
+    // Send match request to backend API
     const res = await fetch(`${apiBaseUrl}/api/match`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -279,7 +285,7 @@ async function runHMMMapMatching() {
 
     const matchData = await res.json();
 
-    // 1. Update KPI Cards
+    // 1. Update KPI Dashboard Cards (HMM Top-1 vs. Standalone Classifier baseline)
     if (matchData.metrics.observation_top1_accuracy !== null) {
       const hmmAcc = (matchData.metrics.observation_top1_accuracy * 100).toFixed(1);
       kpiHmmAcc.textContent = `${hmmAcc}%`;
@@ -302,14 +308,14 @@ async function runHMMMapMatching() {
     kpiLatency.textContent = `${matchData.execution_time_ms} ms`;
     kpiResets.textContent = `${matchData.metrics.num_resets} resets`;
 
-    // 2. Render GeoJSON Layers on Map
+    // 2. Render Reconstructed Route GeoJSON Layers on Map
     layers.predictedRoute.clearLayers();
     layers.referenceRoute.clearLayers();
 
     if (matchData.geojson && matchData.geojson.features) {
       matchData.geojson.features.forEach((feat) => {
         if (feat.geometry.type === 'LineString') {
-          // Leaflet expects [lat, lon], GeoJSON is [lon, lat]
+          // Leaflet expects [latitude, longitude] pairs, while GeoJSON provides [longitude, latitude]
           const coords = feat.geometry.coordinates.map((c) => [c[1], c[0]]);
           const isPred = feat.properties.layer === 'predicted_route';
 
@@ -330,7 +336,7 @@ async function runHMMMapMatching() {
       });
     }
 
-    // 3. Populate Observation Sequence Table
+    // 3. Populate Step-by-Step Observation Sequence Table
     inspectorCount.textContent = matchData.predictions.length;
     obsTableBody.innerHTML = '';
 
