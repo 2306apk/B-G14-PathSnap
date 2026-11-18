@@ -9,7 +9,9 @@ FEATURE_NAMES = [
     'distance_m','log_distance_m','segment_length_m','log_segment_length',
     'heading_alignment','abs_heading_alignment','position_along_segment',
     'endpoint_proximity','gps_speed_mps','gps_motion_m','node_degree',
-    'distance_rank','road_dx','road_dy'
+    'distance_rank','road_dx','road_dy',
+    'gps_time_gap_s','gps_turn_angle_rad','gps_acceleration_mps2',
+    'candidate_distance_margin_m'
 ]
 
 
@@ -87,6 +89,26 @@ class SpatialCandidates:
         dt = np.maximum(dt, 1e-6)
         speed = np.linalg.norm(dx, axis=1) / dt
         heading = dx / np.maximum(np.linalg.norm(dx, axis=1, keepdims=True), 1e-8)
+        # Stage 6: four additional causal, reference-independent features.
+        # Use the full GPS sequence, THEN index observations (training may stride).
+        # 1. Time gap: capped to limit the impact of large outages.
+        time_gap = np.minimum(dt, 300.0)
+        time_gap[0] = 0.0
+        # 2. Absolute change in GPS heading; zero when stationary or first sample.
+        previous_dx = np.zeros_like(dx)
+        previous_dx[1:] = dx[:-1]
+        movement = np.linalg.norm(dx, axis=1)
+        prev_movement = np.linalg.norm(previous_dx, axis=1)
+        cos_turn = np.sum(dx * previous_dx, axis=1) / np.maximum(movement * prev_movement, 1e-8)
+        turn_angle = np.arccos(np.clip(cos_turn, -1.0, 1.0))
+        turn_angle[(movement < 1e-5) | (prev_movement < 1e-5)] = 0.0
+        # 3. GPS acceleration, clipped against outliers.
+        previous_speed = np.zeros_like(speed)
+        previous_speed[1:] = speed[:-1]
+        acceleration = np.clip((speed - previous_speed) / np.maximum(dt, 1.0), -30.0, 30.0)
+        acceleration[0] = 0.0
+        # 4. Candidate's distance above the closest candidate (metres).
+        candidate_margin = d - np.min(d, axis=1, keepdims=True)
         road_unit = self.vectors[ids] / np.maximum(self.length[ids, None], 1e-8)
         dot = np.sum(heading[obs_indices, None, :] * road_unit, axis=2)
         deg = self.node_degree[self.trip.arcs[ids, 0]] + self.node_degree[self.trip.arcs[ids, 1]]
@@ -97,6 +119,8 @@ class SpatialCandidates:
             d, np.log1p(d), self.length[ids], np.log1p(self.length[ids]),
             dot, np.abs(dot), fraction, np.minimum(fraction, 1-fraction),
             col(speed[obs_indices, None]), col(np.linalg.norm(dx[obs_indices], axis=1)[:, None]),
-            deg, col(np.arange(k)[None, :]), road_unit[:, :, 0], road_unit[:, :, 1]
+            deg, col(np.arange(k)[None, :]), road_unit[:, :, 0], road_unit[:, :, 1],
+            col(time_gap[obs_indices, None]), col(turn_angle[obs_indices, None]),
+            col(acceleration[obs_indices, None]), candidate_margin
         ], axis=-1)
         return features.astype(np.float32)
