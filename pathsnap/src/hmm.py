@@ -18,9 +18,9 @@ from shapely.geometry import Point
 class MapMatchingHMM:
     def __init__(
         self,
-        beta: float = 30.0,            # Scale parameter for transition distance difference |d_route - d_euclid|
-        disconnected_penalty: float = -25.0, # Log-prob penalty for disconnected road segments
-        same_arc_bonus: float = 1.0     # Bonus for remaining on the same continuous arc
+        beta: float = 12.0,            # Sharper transition scale penalizing illegal detour jumps
+        disconnected_penalty: float = -35.0, # Stronger log penalty preventing network teleportation
+        same_arc_bonus: float = 2.5     # Higher prior bonus for staying on legitimate continuous road segments
     ):
         self.beta = beta
         self.disconnected_penalty = disconnected_penalty

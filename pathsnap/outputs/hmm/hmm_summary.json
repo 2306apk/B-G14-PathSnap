@@ -1,7 +1,7 @@
 {
   "mean_clf_top1_acc": 81.85,
-  "mean_hmm_viterbi_acc": 88.07,
+  "mean_hmm_viterbi_acc": 88.9,
   "mean_clf_continuity": 89.82,
-  "mean_hmm_continuity": 95.92,
+  "mean_hmm_continuity": 96.93,
   "total_student_test_trips": 10
 }

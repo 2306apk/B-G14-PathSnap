@@ -70,7 +70,7 @@ def main():
     test_probs = clf.predict_proba(test_df[FEATURE_COLS].to_numpy())[:, 1]
     test_df['pred_prob'] = test_probs
     
-    hmm = MapMatchingHMM(beta=30.0, disconnected_penalty=-25.0, same_arc_bonus=1.5)
+    hmm = MapMatchingHMM(beta=12.0, disconnected_penalty=-35.0, same_arc_bonus=2.5)
     
     loader = PathSnapDataLoader('Student folder')
     trip_ids = sorted(test_df['trip_id'].unique())
