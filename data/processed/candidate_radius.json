@@ -1,0 +1,18 @@
+{
+  "p95_reference_distance_m": 18.842315483093245,
+  "p99_reference_distance_m": 69.82888473510742,
+  "selected_radius_m": 70.0,
+  "selected_recall": 0.9900251009494707,
+  "selected_miss_rate": 0.009974899050529302,
+  "observation_count": 183260,
+  "calibration_trip_count": 78,
+  "excluded_extreme_route_mismatch_trips": [
+    "00000033",
+    "00000054"
+  ],
+  "trip_median_extreme_fence_m": 11.861302435398102,
+  "all_training_p95_reference_distance_m": 142.0964416503903,
+  "all_training_p99_reference_distance_m": 205.82268371582032,
+  "all_training_selected_recall": 0.895958583033054,
+  "all_training_selected_miss_rate": 0.10404141696694608
+}

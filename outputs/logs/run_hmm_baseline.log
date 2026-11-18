@@ -1,0 +1,17 @@
+ trip_id         emission_model  scored_observations  classifier_top1_accuracy  viterbi_top1_accuracy  classifier_route_continuity  viterbi_route_continuity
+00000000 hist_gradient_boosting                 2503                  0.928885               0.965242                     0.956035                  0.998401
+00000007 hist_gradient_boosting                 1354                  0.897341               0.907681                     0.990392                  0.999261
+00000009 hist_gradient_boosting                 1049                  0.815062               0.853194                     0.846374                  0.992366
+00000040 hist_gradient_boosting                 2995                  0.894157               0.925543                     0.947562                  0.998998
+00000052 hist_gradient_boosting                  262                  0.935115               0.958015                     0.931034                  0.988506
+00000056 hist_gradient_boosting                 3958                  0.861799               0.910814                     0.866566                  0.990144
+00000065 hist_gradient_boosting                  768                  0.803385               0.855469                     0.886571                  1.000000
+00000076 hist_gradient_boosting                 1486                  0.798116               0.920592                     0.838384                  0.991919
+00000077 hist_gradient_boosting                 3911                  0.642547               0.781642                     0.893862                  0.996164
+00000091 hist_gradient_boosting                  874                  0.813501               0.910755                     0.846506                  0.994273
+MEAN
+scored_observations            1916.000000
+classifier_top1_accuracy          0.838991
+viterbi_top1_accuracy             0.898895
+classifier_route_continuity       0.900329
+viterbi_route_continuity          0.995003

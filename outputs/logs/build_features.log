@@ -1,0 +1,4 @@
+              radius_m  candidate_rows  observation_count  observations_with_candidates  no_candidate_count  no_candidate_rate  reference_candidate_miss_count  reference_candidate_miss_rate
+partition                                                                                                                                                                                    
+student_test     700.0          324291              19160                         19160                   0           0.000000                              21                       0.005306
+train           5600.0         2817917             208417                        193131               15286           0.895536                           21684                       1.733782

@@ -1,0 +1,61 @@
+/Users/apoorva_kogta/Documents/ML-Hackathon-Codex/G14-PathSnap/scripts/run_eda.py:156: SyntaxWarning: invalid escape sequence '\ '
+  """
+{
+  "trip_counts": {
+    "student_test": 10,
+    "train": 80
+  },
+  "track_rows": {
+    "student_test": 19160,
+    "train": 208417
+  },
+  "node_rows": {
+    "student_test": 90689,
+    "train": 1933485
+  },
+  "arc_rows": {
+    "student_test": 185041,
+    "train": 3876904
+  },
+  "route_rows": {
+    "student_test": 3477,
+    "train": 31336
+  },
+  "one_second_gaps": 219934,
+  "all_gaps": 227487,
+  "one_second_gap_rate": 0.9667981027487285,
+  "gaps_gt_10s": 617,
+  "gaps_gt_30s": 135,
+  "gaps_gt_60s": 70,
+  "gaps_gt_120s": 42,
+  "max_gap_s": 153064.0,
+  "parse_or_validation_errors": 0,
+  "unique_network_hashes": 90,
+  "epsg_codes": [
+    32614,
+    32615,
+    32616,
+    32617,
+    32622,
+    32629,
+    32630,
+    32631,
+    32632,
+    32633,
+    32634,
+    32635,
+    32636,
+    32637,
+    32638,
+    32639,
+    32640,
+    32641,
+    32643,
+    32648,
+    32651,
+    32653,
+    32721,
+    32722,
+    32735
+  ]
+}

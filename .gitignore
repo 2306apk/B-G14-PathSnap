@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.egg-info/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Original and linked raw data are never committed.
+data/raw/*
+!data/raw/train/
+!data/raw/student_test/
+data/raw/train/*
+data/raw/student_test/*
+*.zip
+
+# Reproducible generated artifacts.
+data/processed/**
+!data/processed/.gitkeep
+!data/processed/candidate_radius.json
+!data/processed/models/
+data/processed/models/*
+!data/processed/models/initial_ranking.json
+*.joblib
