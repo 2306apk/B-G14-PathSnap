@@ -1,0 +1,9 @@
+{
+  "training_trips": 80,
+  "student_testing_trips": 10,
+  "training_observations": 208417,
+  "testing_observations": 19160,
+  "missing_gps_values": 0,
+  "gps_gaps_gt_1_second": 7550,
+  "invalid_reference_routes": 0
+}

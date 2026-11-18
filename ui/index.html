@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PathSnap · Evaluator UI</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1223;--surface:#172338;--line:#2a3c56;--muted:#aebbd1;--accent:#60a5fa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#edf4ff;font:16px system-ui,-apple-system,sans-serif}header{padding:23px 5vw;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}h1{font-size:27px;margin:0}h1 span{color:var(--accent)}small,p.muted{color:var(--muted)}main{max-width:1400px;margin:20px auto;padding:0 22px}.controls{padding:20px;background:var(--surface);border-radius:14px;display:flex;gap:14px;align-items:end;flex-wrap:wrap}.field{display:grid;gap:6px;flex:1;min-width:185px}label{font-size:13px;color:var(--muted)}input,select,button{font:inherit;padding:12px;border-radius:9px;border:1px solid var(--line);color:#eff6ff;background:#0f1a2c}button{cursor:pointer;background:#2563eb;border-color:#2563eb;font-weight:700}button:disabled{opacity:.5;cursor:not-allowed}button:hover:not(:disabled){background:#1d4ed8}.status{margin:16px 0;min-height:24px;color:#9dbaf1}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:20px 0}.metric{background:var(--surface);padding:16px;border-radius:11px;border:1px solid var(--line)}.metric b{display:block;font-size:24px;margin-top:7px}.mapcard{background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--line)}.maphead{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap;align-items:center}.legend{display:flex;gap:13px;flex-wrap:wrap;font-size:13px} .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.map{display:block;width:100%;height:58vh;min-height:380px;background:#0c1728}.footer{margin:18px 2px;font-size:13px;color:var(--muted)}.hint{padding:20px;max-width:750px;color:var(--muted)}
+</style></head><body>
+<header><div><h1><span>PathSnap</span> / Route Reconstruction</h1><small>Distributed evaluator interface · Laptop 2 · API on Laptop 1</small></div><div id="partition">Awaiting API connection</div></header>
+<main><section class="controls">
+<div class="field"><label for="api">Laptop 1 API address</label><input id="api" value="http://127.0.0.1:8000" spellcheck="false" aria-label="API address"></div>
+<div class="field"><label for="trip">Evaluation trip</label><select id="trip"><option value="">Connect to load trips</option></select></div>
+<button id="connect">Connect &amp; load</button><button id="predict" disabled>Reconstruct trip</button>
+</section><div id="status" class="status" aria-live="polite">Enter Laptop 1's LAN IP address, then connect.</div>
+<section id="metrics" class="metrics"></section>
+<section class="mapcard"><div class="maphead"><strong>Route map</strong><div class="legend">
+<label><input type="checkbox" id="showRoad" checked><i class="dot" style="background:#607089"></i> Road network</label>
+<label><input type="checkbox" id="showGps" checked><i class="dot" style="background:#60a5fa"></i> Raw GPS</label>
+<label><input type="checkbox" id="showMatched" checked><i class="dot" style="background:#f87171"></i> Predicted road arcs</label>
+</div></div><canvas id="map" class="map"></canvas><div class="hint" id="maphint">The map uses the actual supplied road geometry and works offline. No external map tiles or third-party API keys are required.</div></section>
+<p class="footer">Reference route labels remain on Laptop 1. Only aggregated evaluation metrics are transmitted; reference geometry and pointwise truth are not sent to this UI. If no reserved evaluation data is installed, the ten student-testing trips are used for demonstration.</p>
+</main>
+<script>
+const el=id=>document.getElementById(id);let result=null;let busy=false;
+function url(path){return el('api').value.trim().replace(/\/$/,'')+path}
+function status(s){el('status').textContent=s}
+function metric(name,value){let div=document.createElement('div');div.className='metric';let text=document.createElement('small');text.textContent=name;let b=document.createElement('b');b.textContent=value;div.append(text,b);return div}
+function percent(v){return typeof v==='number'?(v*100).toFixed(2)+'%':'N/A'}
+async function connect(){status('Connecting to Laptop 1…');el('predict').disabled=true;try{
+ const res=await fetch(url('/trips'));if(!res.ok)throw Error('HTTP '+res.status);const data=await res.json();const selector=el('trip');selector.replaceChildren();data.trips.forEach(id=>{let opt=document.createElement('option');opt.value=id;opt.textContent=id;selector.appendChild(opt)});
+ el('partition').textContent=data.partition==='evaluator_test'?'Reserved evaluator trips':'Student-testing demo';el('predict').disabled=data.trips.length===0;
+ status(data.trips.length+' trip(s) loaded: '+data.note)}catch(e){status('Connection failed: '+e.message+'. Check API address, laptop LAN and firewall.')}}
+async function run(){if(busy||!el('trip').value)return;busy=true;el('predict').disabled=true;status('Predicting selected trip through model and HMM on Laptop 1…');const began=performance.now();try{
+ const res=await fetch(url('/predict'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trip_id:el('trip').value})});if(!res.ok){const d=await res.text();throw Error('HTTP '+res.status+': '+d.slice(0,200))}result=await res.json();
+ const m=result.metrics||{};let metrics=el('metrics');metrics.replaceChildren();metrics.append(metric('Trip ID',result.trip_id),metric('GPS observations',result.observations.toLocaleString()),metric('Model + HMM inference',result.inference_seconds.toFixed(2)+' s'),metric('Candidate-only Top-1',percent(m.observation_top1_accuracy)),metric('HMM Top-1 (approx.)',percent(m.hmm_observation_accuracy)),metric('Candidate miss rate',percent(m.candidate_miss_rate)),metric('Classifier continuity',percent(m.classifier_direct_continuity)),metric('HMM continuity',percent(m.hmm_direct_continuity)));
+ status('Completed '+result.trip_id+' in '+((performance.now()-began)/1000).toFixed(1)+' s (including request and server-side scoring). '+(m.metric_note||''));draw();
+ }catch(e){status('Prediction failed: '+e.message)}finally{busy=false;el('predict').disabled=false}}
+function draw(){let c=el('map'),rect=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;c.width=Math.max(10,Math.round(rect.width*dpr));c.height=Math.max(10,Math.round(rect.height*dpr));const ctx=c.getContext('2d');ctx.scale(dpr,dpr);const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0c1728';ctx.fillRect(0,0,w,h);if(!result)return;
+ const gps=result.raw_gps_latlon||[];if(!gps.length)return;
+ // The canvas receives [lat,lon] coordinates; each trip is displayed using its own bounds.
+ let minLat=Infinity,maxLat=-Infinity,minLon=Infinity,maxLon=-Infinity;for(const [lat,lon] of gps){minLat=Math.min(minLat,lat);maxLat=Math.max(maxLat,lat);minLon=Math.min(minLon,lon);maxLon=Math.max(maxLon,lon)}
+ const lat0=(minLat+maxLat)/2,unit=Math.cos(lat0*Math.PI/180);const dx=Math.max((maxLon-minLon)*unit,1e-8),dy=Math.max(maxLat-minLat,1e-8);const scale=Math.min((w-60)/dx,(h-60)/dy);const left=(w-dx*scale)/2,top=(h-dy*scale)/2;
+ const project=(p)=>[left+(p[1]-minLon)*unit*scale,h-top-(p[0]-minLat)*scale];
+ function lines(lines,color,width,alpha=1){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.globalAlpha=alpha;ctx.beginPath();for(const seg of lines){const a=project(seg[0]),b=project(seg[1]);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1])}ctx.stroke();ctx.globalAlpha=1}
+ if(el('showRoad').checked)lines(result.nearby_roads_latlon||[],'#6a7d96',1,.55);
+ if(el('showMatched').checked)lines(result.predicted_segments_latlon||[],'#fb7185',3,.85);
+ if(el('showGps').checked){ctx.strokeStyle='#60a5fa';ctx.lineWidth=1.3;ctx.beginPath();for(let i=0;i<gps.length;i++){let p=project(gps[i]);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])}ctx.stroke();ctx.fillStyle='#60a5fa';for(let i=0;i<gps.length;i+=Math.max(1,Math.floor(gps.length/400))){let p=project(gps[i]);ctx.beginPath();ctx.arc(p[0],p[1],2,0,Math.PI*2);ctx.fill()}}
+ ctx.fillStyle='#bbcee7';ctx.font='13px system-ui';ctx.fillText('Local geographic view (not a street-tile basemap)',18,24)
+}
+el('connect').addEventListener('click',connect);el('predict').addEventListener('click',run);['showRoad','showGps','showMatched'].forEach(x=>el(x).addEventListener('change',draw));window.addEventListener('resize',draw);
+</script></body></html>
