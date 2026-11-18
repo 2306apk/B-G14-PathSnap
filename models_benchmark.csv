@@ -1,0 +1,6 @@
+Model,Accuracy,Precision,Recall,F1_Score,Log_Loss,Train_Time_s,Infer_Time_s
+Logistic Regression,0.8021,0.7931,0.7769,0.7849,0.4562,0.68,0.019
+Decision Tree,0.8024,0.7907,0.7819,0.7863,0.7639,3.65,0.024
+Random Forest,0.8121,0.8041,0.7878,0.7959,0.4137,5.96,0.151
+HistGradientBoosting,0.8101,0.803,0.7837,0.7933,0.4211,1.17,0.086
+Neural Network (MLP),0.8053,0.798,0.7782,0.788,0.4287,17.25,0.042

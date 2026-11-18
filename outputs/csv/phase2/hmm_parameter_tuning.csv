@@ -1,5 +1,0 @@
-config_id,params,clf_top1,hmm_top1,continuity,top1_gain
-1,"{'beta': 25.0, 'unreachable_penalty': 20.0, 'theta_0': 90.0, 'emission_weight': 1.0, 'transition_weight': 1.0}",0.8729760547320411,0.9767714611500244,0.9941296629394774,0.10379540641798335
-2,"{'beta': 25.0, 'unreachable_penalty': 10.0, 'theta_0': 60.0, 'emission_weight': 1.2, 'transition_weight': 1.0}",0.8729760547320411,0.9752076885486236,0.993021253378845,0.10223163381658251
-3,"{'beta': 20.0, 'unreachable_penalty': 5.0, 'theta_0': 55.0, 'emission_weight': 1.5, 'transition_weight': 1.0}",0.8729760547320411,0.972405929304447,0.9919128282904688,0.09942987457240593
-4,"{'beta': 15.0, 'unreachable_penalty': 4.0, 'theta_0': 50.0, 'emission_weight': 1.8, 'transition_weight': 1.0}",0.8729760547320411,0.9698973774230331,0.9909675200695992,0.09692132269099196

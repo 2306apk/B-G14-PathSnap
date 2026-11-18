@@ -1,4 +1,0 @@
-system,features_used,top1_accuracy,route_continuity
-14-Feature Classifier-Only,14,0.8218,0.9026
-14-Feature Baseline HMM,14,0.9213,0.9866
-18-Feature Refined HMM,18,0.9369,0.9815

@@ -1,7 +1,0 @@
-model_name,cv_top1_acc,cv_macro_f1,student_test_macro_f1,student_test_top1_acc,student_test_log_loss,student_test_precision,student_test_recall,infer_ms_per_sample
-Logistic Regression,0.7993 +/- 0.1025,0.7749 +/- 0.0177,0.7797,0.8116,0.2213,0.4608,0.9534,0.0001
-Gaussian Naive Bayes,0.7349 +/- 0.0893,0.7415 +/- 0.0361,0.6654,0.7354,1.2976,0.3015,0.9718,0.0001
-Decision Tree,0.7691 +/- 0.1639,0.8237 +/- 0.0344,0.836,0.808,0.2075,0.5695,0.9496,0.0001
-Random Forest,0.8235 +/- 0.1596,0.8485 +/- 0.0376,0.8605,0.8213,0.1423,0.6247,0.948,0.001
-HistGradientBoosting,0.8224 +/- 0.1722,0.8704 +/- 0.0469,0.8899,0.8224,0.0977,0.7263,0.8959,0.0014
-Tuned Random Forest,Tuned,Tuned,0.8625,0.8221,0.1389,0.6309,0.9443,0.001
