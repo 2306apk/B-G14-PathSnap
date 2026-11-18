@@ -1,0 +1,89 @@
+{
+  "partition": "student_test",
+  "trip_count": 10,
+  "observations": 19160,
+  "metric_note": "Observation-level Top-1 is scored using approximate GPS-to-reference-route alignment; direct continuity counts same or directly adjacent road arcs only.",
+  "classifier_top1_accuracy": 0.7624739039665971,
+  "hmm_top1_accuracy": 0.8387265135699373,
+  "top1_absolute_percentage_point_change": 7.625260960334024,
+  "classifier_direct_continuity": 0.8961335991212177,
+  "hmm_direct_continuity": 0.9730530197710617,
+  "continuity_absolute_percentage_point_change": 7.691942064984403,
+  "trips_improved": [
+    "00000000",
+    "00000007",
+    "00000009",
+    "00000040",
+    "00000052",
+    "00000056",
+    "00000065",
+    "00000076",
+    "00000077",
+    "00000091"
+  ],
+  "trips_declined": [],
+  "trips_tied": [],
+  "pipeline_total_seconds": 13.416798176000157,
+  "by_trip": [
+    {
+      "trip_id": "00000000",
+      "observations": 2503,
+      "accuracy_delta": 0.03276068717538949,
+      "continuity_delta": 0.04276578737010395
+    },
+    {
+      "trip_id": "00000007",
+      "observations": 1354,
+      "accuracy_delta": 0.06129985228951251,
+      "continuity_delta": 0.008869179600886956
+    },
+    {
+      "trip_id": "00000009",
+      "observations": 1049,
+      "accuracy_delta": 0.0867492850333651,
+      "continuity_delta": 0.09160305343511455
+    },
+    {
+      "trip_id": "00000040",
+      "observations": 2995,
+      "accuracy_delta": 0.04207011686143569,
+      "continuity_delta": 0.04609218436873752
+    },
+    {
+      "trip_id": "00000052",
+      "observations": 262,
+      "accuracy_delta": 0.05343511450381677,
+      "continuity_delta": 0.04214559386973182
+    },
+    {
+      "trip_id": "00000056",
+      "observations": 3958,
+      "accuracy_delta": 0.07630116220313299,
+      "continuity_delta": 0.1000758150113722
+    },
+    {
+      "trip_id": "00000065",
+      "observations": 768,
+      "accuracy_delta": 0.078125,
+      "continuity_delta": 0.11212516297262065
+    },
+    {
+      "trip_id": "00000076",
+      "observations": 1486,
+      "accuracy_delta": 0.1191117092866757,
+      "continuity_delta": 0.11245791245791237
+    },
+    {
+      "trip_id": "00000077",
+      "observations": 3911,
+      "accuracy_delta": 0.117872666837126,
+      "continuity_delta": 0.08823529411764708
+    },
+    {
+      "trip_id": "00000091",
+      "observations": 874,
+      "accuracy_delta": 0.07437070938215096,
+      "continuity_delta": 0.13172966781214202
+    }
+  ]
+}
