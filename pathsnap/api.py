@@ -53,7 +53,6 @@ def model_bundle():
     return load_model(MODEL_PATH)
 
 
-@lru_cache(maxsize=12)
 def run_trip(trip_id: str):
     split=active_partition()
     if trip_id not in list_trips(DATA_ROOT,split):
