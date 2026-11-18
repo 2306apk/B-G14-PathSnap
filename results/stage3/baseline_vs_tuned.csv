@@ -1,0 +1,8 @@
+metric,baseline,tuned,unit
+cv_top1_accuracy,0.6745728057545758,0.6776009852708093,fraction
+cv_candidate_binary_macro_f1,0.833361877291911,0.8349739432863165,fraction
+student_observation_top1_accuracy,0.7613778705636743,0.7624739039665971,fraction
+student_candidate_binary_macro_f1,0.8675214731684001,0.8681558811248606,fraction
+student_candidate_binary_log_loss,0.24540733899277165,0.2987367702428807,fraction
+student_classifier_direct_continuity,0.89754382538485,0.8961335991212177,fraction
+student_inference_seconds_total,0.3015128490014831,0.19590651300040918,seconds

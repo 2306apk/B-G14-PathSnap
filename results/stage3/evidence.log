@@ -1,0 +1,100 @@
+Recomputing tuned model group-CV metrics on all 80 training trips...
+Prepared train trip 1/80: 00000001 -> 110 samples; candidate miss 4.55%; alignment median 4.3m
+Prepared train trip 2/80: 00000002 -> 604 samples; candidate miss 9.11%; alignment median 5.8m
+Prepared train trip 3/80: 00000003 -> 69 samples; candidate miss 5.80%; alignment median 5.7m
+Prepared train trip 4/80: 00000004 -> 89 samples; candidate miss 2.25%; alignment median 8.4m
+Prepared train trip 5/80: 00000005 -> 88 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 6/80: 00000006 -> 121 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 7/80: 00000008 -> 258 samples; candidate miss 2.71%; alignment median 8.0m
+Prepared train trip 8/80: 00000010 -> 226 samples; candidate miss 4.42%; alignment median 7.1m
+Prepared train trip 9/80: 00000011 -> 236 samples; candidate miss 1.69%; alignment median 5.3m
+Prepared train trip 10/80: 00000012 -> 134 samples; candidate miss 2.24%; alignment median 5.5m
+Prepared train trip 11/80: 00000013 -> 215 samples; candidate miss 3.26%; alignment median 4.5m
+Prepared train trip 12/80: 00000014 -> 38 samples; candidate miss 0.00%; alignment median 5.1m
+Prepared train trip 13/80: 00000016 -> 109 samples; candidate miss 15.60%; alignment median 9.2m
+Prepared train trip 14/80: 00000018 -> 32 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared train trip 15/80: 00000019 -> 197 samples; candidate miss 1.52%; alignment median 5.5m
+Prepared train trip 16/80: 00000020 -> 197 samples; candidate miss 0.51%; alignment median 5.4m
+Prepared train trip 17/80: 00000021 -> 1316 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 18/80: 00000022 -> 40 samples; candidate miss 0.00%; alignment median 3.7m
+Prepared train trip 19/80: 00000024 -> 67 samples; candidate miss 0.00%; alignment median 3.0m
+Prepared train trip 20/80: 00000025 -> 99 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 21/80: 00000026 -> 31 samples; candidate miss 0.00%; alignment median 6.5m
+Prepared train trip 22/80: 00000027 -> 58 samples; candidate miss 0.00%; alignment median 3.3m
+Prepared train trip 23/80: 00000028 -> 298 samples; candidate miss 3.02%; alignment median 6.0m
+Prepared train trip 24/80: 00000029 -> 62 samples; candidate miss 0.00%; alignment median 3.7m
+Prepared train trip 25/80: 00000031 -> 354 samples; candidate miss 3.67%; alignment median 4.2m
+Prepared train trip 26/80: 00000032 -> 206 samples; candidate miss 0.49%; alignment median 5.5m
+Prepared train trip 27/80: 00000033 -> 487 samples; candidate miss 68.58%; alignment median 123.7m
+Prepared train trip 28/80: 00000034 -> 302 samples; candidate miss 2.98%; alignment median 6.8m
+Prepared train trip 29/80: 00000035 -> 137 samples; candidate miss 0.73%; alignment median 4.7m
+Prepared train trip 30/80: 00000036 -> 114 samples; candidate miss 1.75%; alignment median 6.0m
+Prepared train trip 31/80: 00000037 -> 57 samples; candidate miss 0.00%; alignment median 2.8m
+Prepared train trip 32/80: 00000038 -> 108 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 33/80: 00000039 -> 31 samples; candidate miss 0.00%; alignment median 3.0m
+Prepared train trip 34/80: 00000041 -> 85 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared train trip 35/80: 00000042 -> 645 samples; candidate miss 0.16%; alignment median 3.8m
+Prepared train trip 36/80: 00000043 -> 194 samples; candidate miss 6.19%; alignment median 11.9m
+Prepared train trip 37/80: 00000044 -> 46 samples; candidate miss 0.00%; alignment median 3.6m
+Prepared train trip 38/80: 00000045 -> 54 samples; candidate miss 0.00%; alignment median 3.8m
+Prepared train trip 39/80: 00000046 -> 117 samples; candidate miss 0.00%; alignment median 6.2m
+Prepared train trip 40/80: 00000047 -> 106 samples; candidate miss 2.83%; alignment median 4.6m
+Prepared train trip 41/80: 00000048 -> 104 samples; candidate miss 0.00%; alignment median 7.1m
+Prepared train trip 42/80: 00000050 -> 44 samples; candidate miss 0.00%; alignment median 6.0m
+Prepared train trip 43/80: 00000051 -> 82 samples; candidate miss 0.00%; alignment median 5.9m
+Prepared train trip 44/80: 00000053 -> 109 samples; candidate miss 3.67%; alignment median 4.1m
+Prepared train trip 45/80: 00000054 -> 1610 samples; candidate miss 66.02%; alignment median 137.9m
+Prepared train trip 46/80: 00000055 -> 206 samples; candidate miss 3.40%; alignment median 4.4m
+Prepared train trip 47/80: 00000057 -> 138 samples; candidate miss 0.00%; alignment median 6.7m
+Prepared train trip 48/80: 00000058 -> 50 samples; candidate miss 4.00%; alignment median 5.2m
+Prepared train trip 49/80: 00000060 -> 72 samples; candidate miss 2.78%; alignment median 6.2m
+Prepared train trip 50/80: 00000061 -> 120 samples; candidate miss 8.33%; alignment median 6.4m
+Prepared train trip 51/80: 00000062 -> 282 samples; candidate miss 0.00%; alignment median 5.1m
+Prepared train trip 52/80: 00000063 -> 232 samples; candidate miss 0.00%; alignment median 5.3m
+Prepared train trip 53/80: 00000064 -> 175 samples; candidate miss 0.00%; alignment median 4.6m
+Prepared train trip 54/80: 00000066 -> 361 samples; candidate miss 0.00%; alignment median 6.9m
+Prepared train trip 55/80: 00000068 -> 63 samples; candidate miss 0.00%; alignment median 3.9m
+Prepared train trip 56/80: 00000069 -> 173 samples; candidate miss 0.00%; alignment median 4.8m
+Prepared train trip 57/80: 00000070 -> 173 samples; candidate miss 1.16%; alignment median 4.2m
+Prepared train trip 58/80: 00000071 -> 71 samples; candidate miss 0.00%; alignment median 4.0m
+Prepared train trip 59/80: 00000072 -> 81 samples; candidate miss 16.05%; alignment median 5.4m
+Prepared train trip 60/80: 00000074 -> 161 samples; candidate miss 0.62%; alignment median 5.1m
+Prepared train trip 61/80: 00000075 -> 136 samples; candidate miss 0.00%; alignment median 4.1m
+Prepared train trip 62/80: 00000078 -> 243 samples; candidate miss 0.00%; alignment median 4.4m
+Prepared train trip 63/80: 00000079 -> 58 samples; candidate miss 3.45%; alignment median 3.5m
+Prepared train trip 64/80: 00000080 -> 210 samples; candidate miss 0.00%; alignment median 6.7m
+Prepared train trip 65/80: 00000081 -> 269 samples; candidate miss 1.12%; alignment median 4.9m
+Prepared train trip 66/80: 00000082 -> 356 samples; candidate miss 3.09%; alignment median 4.7m
+Prepared train trip 67/80: 00000083 -> 126 samples; candidate miss 4.76%; alignment median 6.0m
+Prepared train trip 68/80: 00000084 -> 1336 samples; candidate miss 1.20%; alignment median 7.2m
+Prepared train trip 69/80: 00000085 -> 91 samples; candidate miss 0.00%; alignment median 3.3m
+Prepared train trip 70/80: 00000086 -> 346 samples; candidate miss 0.87%; alignment median 4.2m
+Prepared train trip 71/80: 00000088 -> 73 samples; candidate miss 1.37%; alignment median 3.8m
+Prepared train trip 72/80: 00000089 -> 103 samples; candidate miss 3.88%; alignment median 5.0m
+Prepared train trip 73/80: 00000090 -> 45 samples; candidate miss 2.22%; alignment median 4.1m
+Prepared train trip 74/80: 00000092 -> 658 samples; candidate miss 0.00%; alignment median 4.3m
+Prepared train trip 75/80: 00000093 -> 101 samples; candidate miss 7.92%; alignment median 6.0m
+Prepared train trip 76/80: 00000095 -> 130 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared train trip 77/80: 00000096 -> 273 samples; candidate miss 1.47%; alignment median 5.5m
+Prepared train trip 78/80: 00000097 -> 145 samples; candidate miss 1.38%; alignment median 3.7m
+Prepared train trip 79/80: 00000098 -> 466 samples; candidate miss 0.21%; alignment median 5.3m
+Prepared train trip 80/80: 00000099 -> 194 samples; candidate miss 0.52%; alignment median 5.5m
+Benchmarking classifier inference on the same 10 student-testing trips...
+Prepared student_test trip 1/10: 00000000 -> 2503 samples; candidate miss 2.08%; alignment median 6.2m
+Prepared student_test trip 2/10: 00000007 -> 1354 samples; candidate miss 0.00%; alignment median 4.5m
+Prepared student_test trip 3/10: 00000009 -> 1049 samples; candidate miss 3.81%; alignment median 4.8m
+Prepared student_test trip 4/10: 00000040 -> 2995 samples; candidate miss 0.60%; alignment median 5.2m
+Prepared student_test trip 5/10: 00000052 -> 262 samples; candidate miss 0.00%; alignment median 4.2m
+Prepared student_test trip 6/10: 00000056 -> 3958 samples; candidate miss 1.31%; alignment median 5.0m
+Prepared student_test trip 7/10: 00000065 -> 768 samples; candidate miss 2.60%; alignment median 4.7m
+Prepared student_test trip 8/10: 00000076 -> 1486 samples; candidate miss 1.28%; alignment median 7.1m
+Prepared student_test trip 9/10: 00000077 -> 3911 samples; candidate miss 2.86%; alignment median 7.9m
+Prepared student_test trip 10/10: 00000091 -> 874 samples; candidate miss 3.55%; alignment median 5.0m
+cv_top1_accuracy: 0.674573 -> 0.677601 (fraction)
+cv_candidate_binary_macro_f1: 0.833362 -> 0.834974 (fraction)
+student_observation_top1_accuracy: 0.761378 -> 0.762474 (fraction)
+student_candidate_binary_macro_f1: 0.867521 -> 0.868156 (fraction)
+student_candidate_binary_log_loss: 0.245407 -> 0.298737 (fraction)
+student_classifier_direct_continuity: 0.897544 -> 0.896134 (fraction)
+student_inference_seconds_total: 0.301513 -> 0.195907 (seconds)
+STAGE 3 REPORT EVIDENCE: PASS
