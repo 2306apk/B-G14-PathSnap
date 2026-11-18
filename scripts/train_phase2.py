@@ -70,6 +70,7 @@ sns.set_theme(style="whitegrid", font_scale=1.05)
 def get_models() -> Dict[str, Tuple[str, Any]]:
     """Returns the EXACT five models specified for Phase 2."""
     return {
+        #Logistic Regression with C=1.0 and 500 iterations
         "Logistic Regression": (
             "Linear & Probabilistic",
             Pipeline([
@@ -77,6 +78,7 @@ def get_models() -> Dict[str, Tuple[str, Any]]:
                 ("clf", LogisticRegression(C=1.0, max_iter=500, class_weight="balanced", random_state=42)),
             ]),
         ),
+        #Gaussian Naive Bayes with 1e-7 var smoothing
         "Gaussian Naive Bayes": (
             "Probabilistic Generative",
             Pipeline([
@@ -84,6 +86,7 @@ def get_models() -> Dict[str, Tuple[str, Any]]:
                 ("clf", GaussianNB(var_smoothing=1e-7)),
             ]),
         ),
+        #Decision Tree with max depth=12, min samples split = 25 and min samples leaf = 12
         "Decision Tree": (
             "Non-linear Tree Rule",
             Pipeline([
@@ -93,6 +96,7 @@ def get_models() -> Dict[str, Tuple[str, Any]]:
                 )),
             ]),
         ),
+        #Random Forest with 80 estimators, max depth=14, min samples split =12 and min samples leaf =6, n_jobs=-1 means it uses all available CPU cores
         "Random Forest": (
             "Ensemble (Bagging)",
             Pipeline([
@@ -103,6 +107,7 @@ def get_models() -> Dict[str, Tuple[str, Any]]:
                 )),
             ]),
         ),
+        #Histogram Gradient Boosting with 80 iterations, max depth=10, learning rate=0.1, min samples leaf=25 and l2 regularization as 0.5
         "HistGradientBoosting": (
             "Gradient Boosting",
             Pipeline([

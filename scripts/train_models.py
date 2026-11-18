@@ -98,6 +98,7 @@ def train_and_evaluate_phase2():
     # 2. Define Model Configurations
     def get_models() -> Dict[str, Tuple[str, Any]]:
         return {
+            #Logistic Regression with C=1.0 and 500 iterations
             "Logistic Regression": (
                 "Linear & Probabilistic",
                 Pipeline([
@@ -105,6 +106,7 @@ def train_and_evaluate_phase2():
                     ("clf", LogisticRegression(C=1.0, max_iter=500, random_state=42)),
                 ]),
             ),
+            #Random Forest with 60 estimators, max_depth=14, min_samples_split=8, random_state=42, n_jobs=-1 which means uses all available CPU cores
             "Random Forest": (
                 "Ensemble (Bagging)",
                 Pipeline([
@@ -114,6 +116,7 @@ def train_and_evaluate_phase2():
                     )),
                 ]),
             ),
+            #Extra Trees
             "Extra Trees": (
                 "Ensemble (Randomized Trees)",
                 Pipeline([
@@ -123,6 +126,7 @@ def train_and_evaluate_phase2():
                     )),
                 ]),
             ),
+            #Histogram Gradient Boosting
             "HistGradientBoosting": (
                 "Gradient Boosting",
                 Pipeline([
@@ -132,6 +136,7 @@ def train_and_evaluate_phase2():
                     )),
                 ]),
             ),
+            #MLP
             "MLP": (
                 "Neural Network",
                 Pipeline([
