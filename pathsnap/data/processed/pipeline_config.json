@@ -1,0 +1,7 @@
+{
+  "candidate_radius_metres": 35.0,
+  "large_gap_threshold_seconds": 5.0,
+  "search_window": 12,
+  "ambiguity_dist_gap_metres": 1.0,
+  "crs_strategy": "per_trip_local_utm"
+}

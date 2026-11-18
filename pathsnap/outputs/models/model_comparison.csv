@@ -1,0 +1,6 @@
+Model,Train Candidate Acc (%),Train Top-1 Obs Acc (%),Train Macro F1,Test Candidate Acc (%),Test Top-1 Obs Acc (%),Test Macro F1,Test Log Loss,Fit Time (s),Inference Time (s),Confusion Matrix (Test)
+Logistic Regression,92.29,66.75,0.8095,94.23,78.97,0.8729,0.1609,8.52,0.01,"[[115465, 3632], [4299, 13984]]"
+Gaussian Naive Bayes,87.43,63.24,0.7509,88.28,73.83,0.7888,0.7526,0.9,0.05,"[[106445, 12652], [3455, 14828]]"
+Decision Tree,92.97,68.37,0.8351,94.78,79.69,0.8873,0.1412,52.98,0.03,"[[115433, 3664], [3508, 14775]]"
+Random Forest,93.44,68.18,0.8429,95.04,79.64,0.8913,0.1212,193.7,0.5,"[[115921, 3176], [3640, 14643]]"
+HistGradientBoosting,93.16,68.08,0.8364,94.95,79.58,0.8893,0.1226,33.99,0.59,"[[115869, 3228], [3709, 14574]]"

@@ -1,0 +1,112 @@
+[
+  {
+    "Model": "Logistic Regression",
+    "Train Candidate Acc (%)": 92.29,
+    "Train Top-1 Obs Acc (%)": 66.75,
+    "Train Macro F1": 0.8095,
+    "Test Candidate Acc (%)": 94.23,
+    "Test Top-1 Obs Acc (%)": 78.97,
+    "Test Macro F1": 0.8729,
+    "Test Log Loss": 0.1609,
+    "Fit Time (s)": 8.52,
+    "Inference Time (s)": 0.01,
+    "Confusion Matrix (Test)": [
+      [
+        115465,
+        3632
+      ],
+      [
+        4299,
+        13984
+      ]
+    ]
+  },
+  {
+    "Model": "Gaussian Naive Bayes",
+    "Train Candidate Acc (%)": 87.43,
+    "Train Top-1 Obs Acc (%)": 63.24,
+    "Train Macro F1": 0.7509,
+    "Test Candidate Acc (%)": 88.28,
+    "Test Top-1 Obs Acc (%)": 73.83,
+    "Test Macro F1": 0.7888,
+    "Test Log Loss": 0.7526,
+    "Fit Time (s)": 0.9,
+    "Inference Time (s)": 0.05,
+    "Confusion Matrix (Test)": [
+      [
+        106445,
+        12652
+      ],
+      [
+        3455,
+        14828
+      ]
+    ]
+  },
+  {
+    "Model": "Decision Tree",
+    "Train Candidate Acc (%)": 92.97,
+    "Train Top-1 Obs Acc (%)": 68.37,
+    "Train Macro F1": 0.8351,
+    "Test Candidate Acc (%)": 94.78,
+    "Test Top-1 Obs Acc (%)": 79.69,
+    "Test Macro F1": 0.8873,
+    "Test Log Loss": 0.1412,
+    "Fit Time (s)": 52.98,
+    "Inference Time (s)": 0.03,
+    "Confusion Matrix (Test)": [
+      [
+        115433,
+        3664
+      ],
+      [
+        3508,
+        14775
+      ]
+    ]
+  },
+  {
+    "Model": "Random Forest",
+    "Train Candidate Acc (%)": 93.44,
+    "Train Top-1 Obs Acc (%)": 68.18,
+    "Train Macro F1": 0.8429,
+    "Test Candidate Acc (%)": 95.04,
+    "Test Top-1 Obs Acc (%)": 79.64,
+    "Test Macro F1": 0.8913,
+    "Test Log Loss": 0.1212,
+    "Fit Time (s)": 193.7,
+    "Inference Time (s)": 0.5,
+    "Confusion Matrix (Test)": [
+      [
+        115921,
+        3176
+      ],
+      [
+        3640,
+        14643
+      ]
+    ]
+  },
+  {
+    "Model": "HistGradientBoosting",
+    "Train Candidate Acc (%)": 93.16,
+    "Train Top-1 Obs Acc (%)": 68.08,
+    "Train Macro F1": 0.8364,
+    "Test Candidate Acc (%)": 94.95,
+    "Test Top-1 Obs Acc (%)": 79.58,
+    "Test Macro F1": 0.8893,
+    "Test Log Loss": 0.1226,
+    "Fit Time (s)": 33.99,
+    "Inference Time (s)": 0.59,
+    "Confusion Matrix (Test)": [
+      [
+        115869,
+        3228
+      ],
+      [
+        3709,
+        14574
+      ]
+    ]
+  }
+]
