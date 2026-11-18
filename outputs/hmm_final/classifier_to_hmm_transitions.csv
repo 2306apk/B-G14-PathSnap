@@ -1,0 +1,6 @@
+Transition Category,Observation Count,Percentage
+Both RF and HMM Correct,149380,71.67
+HMM Corrects RF Error (Corrections),27191,13.05
+"RF Correct, HMM Wrong (Regressions)",4744,2.28
+Both RF and HMM Wrong,27102,13.0
+Total Observations Evaluated,208417,100.0
