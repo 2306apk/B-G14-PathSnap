@@ -1,0 +1,27 @@
+Evaluating trip 00000000
+  classifier Top1 0.9073 -> HMM 0.9401; direct continuity 0.9472 -> 0.9900; runtime 1.4s
+Evaluating trip 00000007
+  classifier Top1 0.8973 -> HMM 0.9586; direct continuity 0.9911 -> 1.0000; runtime 0.6s
+Evaluating trip 00000009
+  classifier Top1 0.7722 -> HMM 0.8589; direct continuity 0.8330 -> 0.9246; runtime 0.8s
+Evaluating trip 00000040
+  classifier Top1 0.8497 -> HMM 0.8918; direct continuity 0.9449 -> 0.9910; runtime 1.9s
+Evaluating trip 00000052
+  classifier Top1 0.9198 -> HMM 0.9733; direct continuity 0.9234 -> 0.9655; runtime 0.2s
+Evaluating trip 00000056
+  classifier Top1 0.8166 -> HMM 0.8929; direct continuity 0.8587 -> 0.9588; runtime 3.2s
+Evaluating trip 00000065
+  classifier Top1 0.7487 -> HMM 0.8268; direct continuity 0.8631 -> 0.9752; runtime 0.6s
+Evaluating trip 00000076
+  classifier Top1 0.7624 -> HMM 0.8816; direct continuity 0.8343 -> 0.9468; runtime 2.1s
+Evaluating trip 00000077
+  classifier Top1 0.4986 -> HMM 0.6165; direct continuity 0.8900 -> 0.9783; runtime 2.0s
+Evaluating trip 00000091
+  classifier Top1 0.7288 -> HMM 0.8032; direct continuity 0.8339 -> 0.9656; runtime 0.6s
+Summary weighted by observations:
+observation_top1_accuracy 0.7624739039665971
+hmm_observation_accuracy 0.8387265135699373
+classifier_direct_continuity 0.8961335991212177
+hmm_direct_continuity 0.9730530197710617
+candidate_miss_rate 0.017954070981210855
+Results: results/stage4/decoder_comparison.csv
