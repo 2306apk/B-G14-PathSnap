@@ -1,0 +1,43 @@
+{
+  "model": "hist_gradient_boosting",
+  "objective": "group-aware CV observation-level Top-1 accuracy",
+  "optimizer": "Optuna TPESampler (tree-structured Parzen estimator)",
+  "best_cv_accuracy": 0.6968581611517443,
+  "baseline_cv_accuracy": 0.6913449957493604,
+  "best_params": {
+    "max_iter": 142,
+    "max_leaf_nodes": 33,
+    "learning_rate": 0.025923474985611147,
+    "l2_regularization": 0.31469371222721704
+  },
+  "trials": 15,
+  "total_seconds": 69.30622724999921,
+  "baseline_student_test": {
+    "observation_top1_accuracy": 0.7750521920668059,
+    "candidate_miss_rate": 0.017954070981210855,
+    "candidate_binary_macro_f1": 0.8753985273894008,
+    "candidate_binary_precision": 0.7750521920668059,
+    "candidate_binary_recall": 0.7883104077145178,
+    "candidate_binary_accuracy": 0.9460073068893529,
+    "candidate_binary_log_loss": 0.2213914094331892,
+    "classifier_direct_continuity": 0.9019827628130013,
+    "inference_seconds": 0.042547583607750794,
+    "median_alignment_error_m": 5.851639738774785,
+    "observations": 19160
+  },
+  "tuned_student_test": {
+    "observation_top1_accuracy": 0.7745302713987474,
+    "candidate_miss_rate": 0.017954070981210855,
+    "candidate_binary_macro_f1": 0.8750971206672418,
+    "candidate_binary_precision": 0.7745302713987474,
+    "candidate_binary_recall": 0.7877753607658557,
+    "candidate_binary_accuracy": 0.9458768267223382,
+    "candidate_binary_log_loss": 0.22791573422358402,
+    "classifier_direct_continuity": 0.9020353614665605,
+    "inference_seconds": 0.0733480775199194,
+    "median_alignment_error_m": 5.851639738774785,
+    "observations": 19160
+  },
+  "limited_smoke_test": false,
+  "warning": "Approximate GPS-to-reference-route alignment; no per-GPS true arc labels were provided"
+}

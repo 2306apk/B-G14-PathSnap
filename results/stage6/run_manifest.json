@@ -1,0 +1,12 @@
+{
+  "run_type": "FULL TRAIN/TEST",
+  "train_trips": 80,
+  "student_test_trips": 10,
+  "train_stride": 12,
+  "student_test_stride": 1,
+  "candidate_k": 8,
+  "cv_folds": 3,
+  "primary_selection_metric": "group-CV observation-level Top-1 accuracy",
+  "label_limitation": "GPS point labels are approximate alignment against ordered reference route; raw data supplies no pointwise true labels",
+  "selected_model": "hist_gradient_boosting"
+}
